@@ -1,13 +1,10 @@
 
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-  <head>
-    <meta charset="UTF-8"/>
-    <title>Coding Events</title>
-  </head>
-  <body>
+  <head th:fragment="fragments :: head"></head>
+  <body class="container">
 
-    <h1>All Events</h1>
+    <h1 class=" text-center display-3 lead">All Events</h1>
 
 <!--    <ul>-->
 <!--      <th:block th:each="event : ${events}">-->
@@ -16,10 +13,10 @@
 <!--    </ul>-->
 
 
-    <table>
+    <table class="table table-striped text-center">
       <tr th:each="event : ${events}">
-        <td th:text="${event.Key}"></td>
-        <td th:text="${event.value}"></td>
+        <td scope="col" th:text="${event.Key}"></td>
+        <td scope="col" th:text="${event.value}"></td>
         <td th:replace="fragments :: techHub"></td>
       </tr>
     </table>
