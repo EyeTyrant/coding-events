@@ -7,10 +7,7 @@
 <body>
   <h1>Coding Events</h1>
 
-  <nav>
-    <ul>
-      <li><a href="/events">All Events</a> </li>
-    </ul>
-  </nav>
+  // th:replace= references a fragment, "first is name of fragment template :: then name of fragment in the file"
+  <nav th:replace="fragments :: navigation"></nav>
 </body>
 </html>
