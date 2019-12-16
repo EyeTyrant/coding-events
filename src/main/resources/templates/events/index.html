@@ -15,18 +15,13 @@
 <!--      </th:block>-->
 <!--    </ul>-->
 
-<!--    <ul>-->
-<!--      <th:block th:each="event : ${myEvents}">-->
-<!--        <li th:text="${event.key}"></li>-->
-<!--      </th:block>-->
-<!--      <th:block th:each="des : ${myEvents.value}">-->
-<!--        <li th:text="${des}"></li>-->
-<!--      </th:block>-->
-<!--    </ul>-->
 
     <table>
-      <tr th:each="event : ${myEvents}">
-        <td th:each="${event.get(event)}"></td>
+      <tr th:each="event : ${events}">
+        <td th:text="${event.Key}"></td>
+        <td th:text="${event.value}"></td>
+        <td th:replace="fragments :: techHub"></td>
+      </tr>
     </table>
 
   </body>

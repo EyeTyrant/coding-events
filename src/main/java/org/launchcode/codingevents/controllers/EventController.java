@@ -33,13 +33,13 @@ public class EventController {
 
   @GetMapping
   public String displayAllEvents(Model model) {
-    Map<String, String> myEvents = new HashMap<>();
+    Map<String, String> events = new HashMap<>();
 
-    myEvents.put("Strange Loop", "Fun event with many speakers");
-    myEvents.put("Apple WWDC", "Informative events with many apple snobs");
-    myEvents.put("SpringOne Platform", "Overpriced snoozefest with one speaker and no booze");
+    events.put("Strange Loop", "Fun event with many speakers");
+    events.put("Apple WWDC", "Informative events with many apple snobs");
+    events.put("SpringOne Platform", "Overpriced snoozefest with one speaker and no booze");
 
-    model.addAttribute("events", myEvents);
+    model.addAttribute("events", events);
 
     return "events/index";
   }
