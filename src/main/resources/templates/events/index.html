@@ -1,20 +1,33 @@
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
-  <meta charset="UTF-8"/>
-  <title>Create Events</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Coding Events</title>
+  </head>
+  <body>
 
-  <h1>All Events</h1>
+    <h1>All Events</h1>
 
-  <p th:unless="${events} and ${events.size()}">No events!</p>
+<!--    <ul>-->
+<!--      <th:block th:each="event : ${events}">-->
+<!--        <li th:text="${event}"></li>-->
+<!--      </th:block>-->
+<!--    </ul>-->
 
-<ul>
-  <th:block th:each="event : ${events}">
-    <li th:text="${event}"></li>
-  </th:block>
-</ul>
+<!--    <ul>-->
+<!--      <th:block th:each="event : ${myEvents}">-->
+<!--        <li th:text="${event.key}"></li>-->
+<!--      </th:block>-->
+<!--      <th:block th:each="des : ${myEvents.value}">-->
+<!--        <li th:text="${des}"></li>-->
+<!--      </th:block>-->
+<!--    </ul>-->
 
-</body>
+    <table>
+      <tr th:each="event : ${myEvents}">
+        <td th:each="${event.get(event)}"></td>
+    </table>
+
+  </body>
 </html>

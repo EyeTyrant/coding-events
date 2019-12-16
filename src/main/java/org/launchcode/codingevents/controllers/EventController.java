@@ -1,41 +1,47 @@
+
 package org.launchcode.codingevents.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 @Controller
 @RequestMapping("events")
 public class EventController {
 
+//  @GetMapping
+//  public String displayAllEvents(Model model) {
+//
+//    List<String> events = new ArrayList<>();
 
-  private static List<String> events = new ArrayList<>();
+//    events.add("Code With Pride");
+//    events.add("Strange Loop");
+//    events.add("Apple WWDC");
+//    events.add("SpringOne Platform");
+
+//    model.addAttribute("events", events);
+//
+//    return "events/index";
+//  }
 
   @GetMapping
-  public String displayAllEvents(Model model){
-    model.addAttribute("events", events);
+  public String displayAllEvents(Model model) {
+    Map<String, String> myEvents = new HashMap<>();
+
+    myEvents.put("Strange Loop", "Fun event with many speakers");
+    myEvents.put("Apple WWDC", "Informative events with many apple snobs");
+    myEvents.put("SpringOne Platform", "Overpriced snoozefest with one speaker and no booze");
+
+    model.addAttribute("events", myEvents);
+
     return "events/index";
   }
 
-  // lives at /events/create
-  @GetMapping("create")
-  public String renderCreateEventForm(){
-    return "events/create";
-  }
-
-  @PostMapping("create")
-  public String createEvent(@RequestParam String eventName){ // For each piece of data that needs to be retrieved from the form,
-                                                            // declare a parameter of the appropriate type.
-                                                            // @RequestParam matches the parameters to the submitted data.
-                                                            // For this to work, the parameter names MUST match the name attributes
-                                                            // used in each of the input elements.
-    events.add(eventName);
-    return "redirect:";
-  }
 }
