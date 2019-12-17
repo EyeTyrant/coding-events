@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.controllers.event.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,11 @@ import java.util.List;
 public class EventController {
 
 
-  private static List<String> events = new ArrayList<>();
+  private static List<Event> events = new ArrayList<>();
 
   @GetMapping
   public String displayAllEvents(Model model){
+    model.addAttribute("title", "All Events");
     model.addAttribute("events", events);
     return "events/index";
   }
@@ -30,12 +32,17 @@ public class EventController {
   }
 
   @PostMapping("create")
-  public String createEvent(@RequestParam String eventName){ // For each piece of data that needs to be retrieved from the form,
+  public String processCreateEventForm(@RequestParam String eventName,
+                            @RequestParam String eventDescription){ // For each piece of data that needs to be retrieved from the form,
                                                             // declare a parameter of the appropriate type.
                                                             // @RequestParam matches the parameters to the submitted data.
                                                             // For this to work, the parameter names MUST match the name attributes
                                                             // used in each of the input elements.
-    events.add(eventName);
+    events.add(new Event(eventName, eventDescription));
     return "redirect:";
   }
+
+
+
+
 }
