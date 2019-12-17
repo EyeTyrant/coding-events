@@ -4,10 +4,7 @@ import org.launchcode.codingevents.controllers.event.Event;
 import org.launchcode.codingevents.data.EventData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,16 +29,26 @@ public class EventController {
     return "events/create";
   }
 
+//  @PostMapping("create")
+//  public String processCreateEventForm(@RequestParam String eventName,
+//                                       @RequestParam String eventDescription){ // For each piece of data that needs to be retrieved from the form,
+//                                                            // declare a parameter of the appropriate type.
+//                                                            // @RequestParam matches the parameters to the submitted data.
+//                                                            // For this to work, the parameter names MUST match the name="attributes"
+//                                                            // used in each of the input elements.
+//      EventData.add(new Event(eventName, eventDescription));
+//    return "redirect:";
+//  }
+
   @PostMapping("create")
-  public String processCreateEventForm(@RequestParam String eventName,
-                                       @RequestParam String eventDescription){ // For each piece of data that needs to be retrieved from the form,
-                                                            // declare a parameter of the appropriate type.
-                                                            // @RequestParam matches the parameters to the submitted data.
-                                                            // For this to work, the parameter names MUST match the name attributes
+  public String processCreateEventForm(@ModelAttribute Event newEvent){ // For each piece of data that needs to be retrieved from the form,
+                                                            // there is no need to declare a parameter for each data field with a @RequestParam for each
+                                                            // @ModelAttribute matches the parameters to the submitted data automatically.
+                                                            // For this to work, the parameter names which, in this case,
+                                                            // are taken from the Event object fields MUST match the name="attributes"
                                                             // used in each of the input elements.
-    if (eventName != null || eventDescription != null) {
-      EventData.add(new Event(eventName, eventDescription));
-    }
+
+      EventData.add(newEvent);
     return "redirect:";
   }
 

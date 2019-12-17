@@ -9,7 +9,8 @@ import java.util.Map;
 public class EventData {
 
   //a place to put events
-private static final Map<Integer, Event> events = new HashMap<>();
+  private static final Map<Integer, Event> events = new HashMap<>();
+
   //get all events
   public static Collection<Event> getAll(){
     return events.values();
