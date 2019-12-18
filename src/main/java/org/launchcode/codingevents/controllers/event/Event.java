@@ -6,7 +6,7 @@ public class Event {
 
   private int id;
   private static int nextId = 1;
-  public String name;
+  private String name;
   private String description;
 
   public Event(String name, String description) {
