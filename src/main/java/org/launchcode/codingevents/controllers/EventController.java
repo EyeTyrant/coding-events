@@ -82,5 +82,4 @@ public class EventController {
     EventData.getById(eventId).setDescription(description);
     return "redirect:/events";
   }
-
 }
