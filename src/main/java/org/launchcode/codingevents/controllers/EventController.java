@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping("events")
 public class EventController {
 
+
 //  private static List<Event> events = new ArrayList<>();
 
   @GetMapping
