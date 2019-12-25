@@ -1,13 +1,10 @@
 package org.launchcode.codingevents.controllers;
 
-import org.launchcode.codingevents.controllers.event.Event;
+import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.data.EventData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("events")
