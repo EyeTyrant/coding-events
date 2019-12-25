@@ -3,9 +3,11 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 
-  <h1>Create Event</h1>
+  <h1 th:text="${title}">Create Event</h1>
 
   <nav th:replace="fragments :: navigation"></nav>
+
+  <p th:text="${errMsg}" style="color:red;"></p>
 
   <form method="post" action="/events/create"> <!--leaving out action attribute will submit to the same route where the form was rendered-->
 

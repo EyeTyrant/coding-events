@@ -4,7 +4,10 @@ import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.data.EventData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("events")
@@ -21,7 +24,8 @@ public class EventController {
 
   // lives at /events/create
   @GetMapping("create")
-  public String renderCreateEventForm(){
+  public String renderCreateEventForm(Model model){
+    model.addAttribute("title", "Create Event");
     return "events/create";
   }
 
@@ -37,13 +41,19 @@ public class EventController {
 //  }
 
   @PostMapping("create")
-  public String processCreateEventForm(@ModelAttribute Event newEvent){ // For each piece of data that needs to be retrieved from the form,
+  public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors err, Model model){ // For each piece of data that needs to be retrieved from the form,
                                                             // there is no need to declare a parameter for each data field with a @RequestParam for each
                                                             // @ModelAttribute matches the parameters to the submitted data automatically.
                                                             // For this to work, the parameter names which, in this case,
                                                             // are taken from the Event object fields MUST match the name="attributes"
                                                             // used in each of the input elements.
+                                                            // Errors err used with @Valid to handle invalid input values
 
+   if (err.hasErrors()){
+     model.addAttribute("title", "Create Event");
+     model.addAttribute("errMsg", "Bad data entered");
+     return "events/create";
+   }
       EventData.add(newEvent);
     return "redirect:";
   }
