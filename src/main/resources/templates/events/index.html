@@ -16,6 +16,9 @@
           <th>Name</th>
           <th>Description</th>
           <th>Contact Email</th>
+          <th>Location</th>
+          <th>Attendees Expected</th>
+          <th>Registration Required</th>
           <th>Edit</th>
 
         </tr>
@@ -25,6 +28,9 @@
         <td th:text="${event.name}"></td>
         <td th:text="${event.description}"></td>
         <td th:text="${event.contactEmail}"></td>
+        <td th:text="${event.location}"></td>
+        <td th:text="${event.attendees}"></td>
+        <td th:text="${event.regReq}"></td>
         <td>
           <a th:href="@{/events/edit/{id}(id=${event.id})}" class="text-white">Edit</a>
         </td>

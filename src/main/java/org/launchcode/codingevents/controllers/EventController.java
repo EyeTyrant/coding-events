@@ -28,6 +28,8 @@ public class EventController {
     model.addAttribute("title", "Create Event");
     model.addAttribute(new Event()); // It’s also allowable to pass in the Event object without a label
                                      //  In this case, Spring will implicitly create the label "event", which is the lowercase version of the class name.
+
+
     return "events/create";
   }
 
