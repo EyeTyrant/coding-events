@@ -20,7 +20,6 @@ public class Event {
   @NotBlank(message = "Must add a location")
   @Size(min=3, max=50, message = "Location length between 3-50 characters")
   private String location;
-
   @Positive(message = "Must have at least 1 attendee")
   private int attendees;
   @NotBlank(message = "Must register to attend")
