@@ -25,14 +25,15 @@ public class Event {
   @NotBlank(message = "Must register to attend")
   private String regReq;
 
+  private EventType type;
 
-
-  public Event(String name, String description, String contactEmail, String location, int attendees, String regReq) {
+  public Event(String name, String description, String contactEmail, String location, EventType type, int attendees, String regReq) {
     this();
     this.name = name;
     this.description = description;
     this.contactEmail = contactEmail;
     this.location = location;
+    this.type = type;
     this.attendees = attendees;
     this.regReq = regReq;
   }
@@ -77,6 +78,14 @@ public class Event {
 
   public void setLocation(String location) {
     this.location = location;
+  }
+
+  public EventType getType() {
+    return type;
+  }
+
+  public void setType(EventType type) {
+    this.type = type;
   }
 
   public String getRegReq() {

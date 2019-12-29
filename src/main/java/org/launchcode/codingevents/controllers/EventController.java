@@ -2,6 +2,7 @@ package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.data.EventData;
+import org.launchcode.codingevents.models.EventType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -28,7 +29,7 @@ public class EventController {
     model.addAttribute("title", "Create Event");
     model.addAttribute(new Event()); // It’s also allowable to pass in the Event object without a label
                                      //  In this case, Spring will implicitly create the label "event", which is the lowercase version of the class name.
-
+    model.addAttribute("types", EventType.values()); // returns an array of the values in EventType enum list
 
     return "events/create";
   }
@@ -55,6 +56,7 @@ public class EventController {
 
    if (err.hasErrors()){
      model.addAttribute("title", "Create Event");
+     model.addAttribute("types", EventType.values()); // enum attribute must also be added here to appear on page when redirected because of errors
      return "events/create";
    }
       EventData.add(newEvent);
