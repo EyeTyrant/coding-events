@@ -1,8 +1,10 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.EventType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -10,16 +12,27 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.Optional;
+
+
+
 @Controller
 @RequestMapping("events")
 public class EventController {
 
-//  private static List<Event> events = new ArrayList<>();
+//  private static List<Event> events = new ArrayList<>(); // Now stored in EventData class
+
+  @Autowired                               // @Autowired automatically creates instances (called eventRepository in this case) of the EventRepository
+  private EventRepository eventRepository; // class when asked for by the code, EventRepository is the local extension of CrudRepository class which
+                                           // contains the methods (i.e. findAll(), save(), and findById()) for interacting with the database.
+
+
 
   @GetMapping
   public String displayAllEvents(Model model){
     model.addAttribute("title", "All Events");
-    model.addAttribute("events", EventData.getAll());
+//    model.addAttribute("events", EventData.getAll()); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
+    model.addAttribute("events", eventRepository.findAll());
     return "events/index";
   }
 
@@ -59,14 +72,16 @@ public class EventController {
      model.addAttribute("types", EventType.values()); // enum attribute must also be added here to appear on page when redirected because of errors
      return "events/create";
    }
-      EventData.add(newEvent);
+//      EventData.add(newEvent); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
+      eventRepository.save(newEvent);
     return "redirect:";
   }
 
   @GetMapping("delete")
   public String displayDeleteEventForm(Model model){
     model.addAttribute("title", "Delete Events");
-    model.addAttribute("events", EventData.getAll());
+//    model.addAttribute("events", EventData.getAll()); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
+    model.addAttribute("events", eventRepository.findAll());
     return "events/delete";
   }
 
@@ -74,7 +89,8 @@ public class EventController {
   public String processDeleteEventsForm(@RequestParam(required = false) int[] eventIds){
     if (eventIds != null) {
       for (int id : eventIds) {
-        EventData.remove(id);
+//        EventData.remove(id); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
+        eventRepository.deleteById(id);
       }
     }
     return "redirect:";
@@ -82,15 +98,23 @@ public class EventController {
 
   @GetMapping("edit/{eventId}")
   public String displayEditForm(@PathVariable int eventId, Model cheese) {
-    cheese.addAttribute("title", "Edit Event: "+ EventData.getById(eventId)+" (id=" + eventId + ")");
-    cheese.addAttribute("events", EventData.getById(eventId));
+//    cheese.addAttribute("title", "Edit Event: "+ EventData.getById(eventId)+" (id=" + eventId + ")"); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
+    cheese.addAttribute("title", "Edit Event: "+ eventRepository.findById(eventId)+" (id=" + eventId + ")");
+//    cheese.addAttribute("events", EventData.getById(eventId)); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
+    cheese.addAttribute("events", eventRepository.findById(eventId));
     return "events/edit";
   }
 
   @PostMapping("edit")
-  public  String processEditForm(int eventId, String name, String description) {
-    EventData.getById(eventId).setName(name);
-    EventData.getById(eventId).setDescription(description);
+//  public String processEditForm(int eventId, String name, String description) {
+  public String processEditForm(int eventId, Event name, Event description) {
+//    EventData.getById(eventId).setName(name); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
+    eventRepository.findById(eventId);
+    eventRepository.save(name);
+
+//    EventData.getById(eventId).setDescription(description); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
+    eventRepository.findById(eventId);
+    eventRepository.save(description);
     return "redirect:/events";
   }
 }
