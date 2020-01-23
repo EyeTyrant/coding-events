@@ -73,8 +73,8 @@ public class EventController {
      return "events/create";
    }
 //      EventData.add(newEvent); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
-      eventRepository.save(newEvent);
-    return "redirect:";
+    eventRepository.save(newEvent);
+      return "redirect:";
   }
 
   @GetMapping("delete")
