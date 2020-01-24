@@ -73,8 +73,8 @@ public class EventController {
      return "events/create";
    }
 //      EventData.add(newEvent); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
-      eventRepository.save(newEvent);
-    return "redirect:";
+    eventRepository.save(newEvent);
+      return "redirect:";
   }
 
   @GetMapping("delete")
@@ -107,14 +107,15 @@ public class EventController {
 
   @PostMapping("edit")
 //  public String processEditForm(int eventId, String name, String description) {
-  public String processEditForm(int eventId, Event name, Event description) {
+  public String processEditForm(Event event, Integer eventId, String name, String description) {
 //    EventData.getById(eventId).setName(name); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
     eventRepository.findById(eventId);
-    eventRepository.save(name);
+    event.setName(name);
 
 //    EventData.getById(eventId).setDescription(description); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
-    eventRepository.findById(eventId);
-    eventRepository.save(description);
+//    eventRepository.findById(eventId);
+    event.setDescription(description);
+    eventRepository.save(event);
     return "redirect:/events";
   }
 }

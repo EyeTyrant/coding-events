@@ -11,7 +11,7 @@ public class Event {
 
   @Id
   @GeneratedValue
-  private int id;
+  private Integer id;
 
 //  private static int nextId = 1; // Now handled with @GeneratedValue
 
@@ -67,7 +67,7 @@ public class Event {
     this.description = description;
   }
 
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
