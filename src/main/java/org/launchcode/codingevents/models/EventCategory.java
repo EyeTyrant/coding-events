@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 public class EventCategory {
@@ -32,10 +33,25 @@ public class EventCategory {
     this.name = name;
   }
 
+  public int getId() {
+    return id;
+  }
 
+  @Override
+  public String toString() {
+    return name;
+  }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof EventCategory)) return false;
+    EventCategory that = (EventCategory) o;
+    return getId() == that.getId();
+  }
 
-
-
-
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId());
+  }
 }

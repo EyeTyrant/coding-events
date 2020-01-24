@@ -24,19 +24,20 @@ public class EventCategoryController {
   @GetMapping
   public String displayAllEvents(Model model) {
     model.addAttribute("title", "All Categories");
-    model.addAttribute("categories", "eventCategoryRepository.findAll()");
-    return "index";
+    model.addAttribute("eventCategories", eventCategoryRepository.findAll());
+    return "eventCategories/index";
   }
-  @GetMapping
+  @GetMapping("create")
   public String renderCreateEventCategoryForm(Model model) {
     model.addAttribute("title", "Create Category");
     model.addAttribute(new EventCategory());
-    return "create";
+    return "eventCategories/create";
   }
-  @PostMapping
+  @PostMapping("create")
   public String processCreateEventCategoryFrom(@ModelAttribute @Valid EventCategory newEventCategory, Errors err, Model model) {
     if (err.hasErrors()){
       model.addAttribute("title", "Create Category");
+      model.addAttribute(new EventCategory());
       return "eventCategories/create";
     }
     eventCategoryRepository.save(newEventCategory);
