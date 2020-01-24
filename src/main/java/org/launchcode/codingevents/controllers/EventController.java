@@ -107,14 +107,15 @@ public class EventController {
 
   @PostMapping("edit")
 //  public String processEditForm(int eventId, String name, String description) {
-  public String processEditForm(int eventId, Event name, Event description) {
+  public String processEditForm(int eventId, String name, String description, Event event) {
 //    EventData.getById(eventId).setName(name); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
-    eventRepository.findById(eventId);
-    eventRepository.save(name);
-
 //    EventData.getById(eventId).setDescription(description); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
     eventRepository.findById(eventId);
-    eventRepository.save(description);
+    event.setName(name);
+    event.setDescription(description);
+    eventRepository.save(event);
+
+
     return "redirect:/events";
   }
 }
