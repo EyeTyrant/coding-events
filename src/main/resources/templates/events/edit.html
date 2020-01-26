@@ -8,30 +8,21 @@
     <nav th:replace="fragments :: navigation"></nav>
 
     <form method="post" th:action="@{/events/edit}"> <!--leaving out action attribute will submit to the same route where the form was rendered-->
-
       <div class="form-group">
         <label>Name:
-<!--          <input type="text" name="name" th:value="${events.name}" class="form-control">-->
-<!--          EventData class events array no longer needed, data is now stored in database and handled with EventRepository class.-->
           <input type="text" name="name" th:value="${name}" class="form-control">
         </label>
       </div>
       <div class="form-group">
         <label>Description:
-<!--          <input type="text" name="description" th:value="${events.description}" class="form-control">-->
-<!--          EventData class events array no longer needed, data is now stored in database and handled with EventRepository class.-->
           <input type="text" name="description" th:value="${description}" class="form-control">
         </label>
       </div><div class="form-group">
         <label>Email:
-<!--          <input type="text" name="contactEmail" th:value="${events.contactEmail}" class="form-control">-->
-<!--          EventData class events array no longer needed, data is now stored in database and handled with EventRepository class.-->
           <input type="text" name="contactEmail" th:value="${contactEmail}" class="form-control">
         </label>
       </div>
       <div class="form-group">
-<!--        <input type="hidden" th:value="${events.id}" name="eventId">-->
-<!--        EventData class events array no longer needed, data is now stored in database and handled with EventRepository class.-->
         <input type="hidden" th:field="${eventId}" name="eventId">
         <input type="submit" value="Edit Event" class=" btn btn-success">
       </div>
