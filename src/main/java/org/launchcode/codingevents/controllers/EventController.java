@@ -84,6 +84,6 @@ public class EventController {
     event.setName(name);
     event.setDescription(description);
     eventRepository.save(event);
-    return "redirect:/events";
+    return "redirect:";
   }
 }
