@@ -1,3 +1,6 @@
+
+// No longer needed, data now being stored in database and handled with EventRepository
+
 package org.launchcode.codingevents.data;
 
 import org.launchcode.codingevents.models.Event;

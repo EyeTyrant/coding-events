@@ -3,6 +3,7 @@ package org.launchcode.codingevents.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.*;
 import java.util.Objects;
 
@@ -32,15 +33,21 @@ public class Event extends AbstractEntity {
   @NotBlank(message = "Must register to attend")
   private String regReq;
 
-  private EventType type;
+//  private EventType type; // Now handled by EventCategory
 
-  public Event(String name, String description, String contactEmail, String location, EventType type, int attendees, String regReq) {
+@ManyToOne // This annotation tells Hibernate that there can be many events for each category, but an event can only have one category.
+@NotNull(message = "Category is required")
+private EventCategory eventCategory;
+
+//  public Event(String name, String description, String contactEmail, String location, EventType type, int attendees, String regReq) { // Now handled by EventCategory
+  public Event(String name, String description, String contactEmail, String location, EventCategory eventCategory, int attendees, String regReq) {
 //    this(); // No need to call no-arg constructor to generate an ID
     this.name = name;
     this.description = description;
     this.contactEmail = contactEmail;
     this.location = location;
-    this.type = type;
+//    this.type = type; // Now handled by eventCategory
+    this.eventCategory = eventCategory;
     this.attendees = attendees;
     this.regReq = regReq;
   }
@@ -87,12 +94,21 @@ public class Event extends AbstractEntity {
     this.location = location;
   }
 
-  public EventType getType() {
-    return type;
+//  public EventType getType() {
+//    return type;
+//  }
+//
+//  public void setType(EventType type) {
+//    this.type = type;
+//  }                                       // Now handled by eventCategory
+
+
+  public EventCategory getEventCategory() {
+    return eventCategory;
   }
 
-  public void setType(EventType type) {
-    this.type = type;
+  public void setEventCategory(EventCategory eventCategory) {
+    this.eventCategory = eventCategory;
   }
 
   public String getRegReq() {

@@ -36,16 +36,16 @@
     </div>
     
     <div class="form-group">
-      <label>Event Type
-        <select th:field="${event.type}" class="form-control">
-          <option th:each="item : ${types}"
-                  th:value="${item}"
-                  th:text="${item.displayName}"
+      <label>Event Category
+        <select th:field="${event.eventCategory}" class="form-control">
+          <option th:each="eventCategory : ${categories}"
+                  th:value="${eventCategory.id}"
+                  th:text="${eventCategory.name}"
           ></option>
 
         </select>
       </label>
-      <p class="error" th:errors="${event.type}"></p>
+      <p class="error" th:errors="${event.eventCategory}"></p>
     </div>
     
     <div class="form-group">

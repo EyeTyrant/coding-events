@@ -1,3 +1,6 @@
+
+// No longer needed, now handled with EventCategory class
+
 package org.launchcode.codingevents.models;
 
 public enum EventType {
