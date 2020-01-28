@@ -6,6 +6,7 @@ import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.EventCategory;
 //import org.launchcode.codingevents.models.EventType; // Now handled by EventCategory
+import org.launchcode.codingevents.models.EventDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -125,12 +126,12 @@ public class EventController {
 
   @PostMapping("edit")
 //  public String processEditForm(int eventId, String name, String description) {
-  public String processEditForm(int eventId, String name, String description, Event event) {
+  public String processEditForm(int eventId, String name, String description, Event event, EventDetails eventDetails) {
 //    EventData.getById(eventId).setName(name); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
 //    EventData.getById(eventId).setDescription(description); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
     eventRepository.findById(eventId);
     event.setName(name);
-    event.setDescription(description);
+    eventDetails.setDescription(description);
     eventRepository.save(event);
 
 

@@ -10,8 +10,8 @@ import java.util.Objects;
 public abstract class AbstractEntity {
 
 
-  @Id
-  @GeneratedValue
+  @Id // @Id is an annotation that denotes that an integer id field is to be used as an id in the corresponding table in the database.
+  @GeneratedValue // @GeneratedValue is used in conjunction with the @Id annotation to create a primary key for the entity.
   private Integer id;
 
 
