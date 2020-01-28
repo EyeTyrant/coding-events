@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tr th:each="category : ${eventCategories}">
-        <td th:text="${category.name}"></td>
+        <td ><a class="text-white" th:text="${category.name}" th:href="'events?categoryId=' + ${category.id}"></a></td>
     </table>
 
 

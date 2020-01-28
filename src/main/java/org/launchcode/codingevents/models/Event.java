@@ -35,9 +35,9 @@ public class Event extends AbstractEntity {
 
 //  private EventType type; // Now handled by EventCategory
 
-@ManyToOne // This annotation tells Hibernate that there can be many events for each category, but an event can only have one category.
-@NotNull(message = "Category is required")
-private EventCategory eventCategory;
+  @ManyToOne // This annotation tells Hibernate that there can be many events for each category, but an event can only have one category.
+  @NotNull(message = "Category is required")
+  private EventCategory eventCategory;
 
 //  public Event(String name, String description, String contactEmail, String location, EventType type, int attendees, String regReq) { // Now handled by EventCategory
   public Event(String name, String description, String contactEmail, String location, EventCategory eventCategory, int attendees, String regReq) {

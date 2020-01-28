@@ -33,10 +33,22 @@ public class EventController {
   private EventCategoryRepository eventCategoryRepository; // Creates instance of EventCategoryRepository to hold the categories created
 
   @GetMapping
-  public String displayAllEvents(Model model){
+  public String displayEvents(@RequestParam(required = false) Integer categoryId, Model model){
+
+    if (categoryId == null){
     model.addAttribute("title", "All Events");
 //    model.addAttribute("events", EventData.getAll()); // EventData class no longer needed, data is now stored in database and handled with EventRepository class.
     model.addAttribute("events", eventRepository.findAll());
+    } else {
+      Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
+      if (result.isEmpty()) {
+        model.addAttribute("title", "Invalid Category ID: " + categoryId);
+      } else {
+        EventCategory category = result.get();
+        model.addAttribute("title", "Events In Category: " + category.getName());
+        model.addAttribute("events", category.getEvents());
+      }
+    }
     return "events/index";
   }
 
