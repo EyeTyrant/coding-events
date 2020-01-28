@@ -3,6 +3,8 @@ package org.launchcode.codingevents.models;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity // an entity class determines the structure of a table in our relational database.
@@ -27,6 +29,9 @@ public class Event extends AbstractEntity {
   @ManyToOne // This annotation tells Hibernate that there can be many events for each category, but an event can only have one category.
   @NotNull(message = "Category is required")
   private EventCategory eventCategory;
+
+  @ManyToMany
+  private final List<Tag> tags = new ArrayList<>();
 
 //  @Size(max=500, message = "Description too long")
 //  private String description;
@@ -90,6 +95,14 @@ public class Event extends AbstractEntity {
 
   public void setEventDetails(EventDetails eventDetails) {
     this.eventDetails = eventDetails;
+  }
+
+  public List<Tag> getTags() {
+    return tags;
+  }
+
+  public void addTag(Tag tag) {
+    this.tags.add(tag);   // allows users to add tags without directly accessing the List.
   }
 
   //  public int getId() {
